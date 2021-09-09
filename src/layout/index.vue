@@ -1,58 +1,35 @@
 <template>
     <div id="web">
         <div class="app-header">
-            <div class="logo"><img :src="logoSrc" alt=""></div>
-            <el-menu :default-active="activeIndex2"
-                    class="el-menu-demo"
-                    mode="horizontal"
-                    @select="handleSelect"
-                    background-color="#545c64"
-                    text-color="#fff"
-                    active-text-color="#ffd04b">
-                <el-menu-item index="1">处理中心</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">我的工作台</template>
-                    <el-menu-item index="2-1">选项1</el-menu-item>
-                    <el-menu-item index="2-2">选项2</el-menu-item>
-                    <el-menu-item index="2-3">选项3</el-menu-item>
-                    <el-submenu index="2-4">
-                        <template slot="title">选项4</template>
-                        <el-menu-item index="2-4-1">选项1</el-menu-item>
-                        <el-menu-item index="2-4-2">选项2</el-menu-item>
-                        <el-menu-item index="2-4-3">选项3</el-menu-item>
-                    </el-submenu>
-                </el-submenu>
-                <el-menu-item index="3">消息中心</el-menu-item>
-            </el-menu>
-
-            <div class="user-info">
-                <img src=""/> 个人信息
+            <div class="logo"><img src="../assets/logo.png" alt=""></div>
+            <header-menu/>
+            <profile/>
+        </div>
+        <transition name="fade-transform" mode="out-in">
+            <div class="app-container">
+                <breadcrumb/>
+                <el-card>
+                    <router-view/>
+                </el-card>
             </div>
-        </div>
-        <div class="app-container">
-            <el-card>
-                <router-view/>
-            </el-card>
-        </div>
+        </transition>
     </div>
 </template>
 
 <script>
-    import Logo from '@/assets/logo.png'
+    import Profile from './components/profile'
+    import HeaderMenu from './components/menu'
+    import Breadcrumb from './components/breadcrumb'
 
     export default {
+        components: {
+            Profile, HeaderMenu, Breadcrumb
+        },
         name: "Layout",
         data() {
             return {
-                logoSrc: Logo,
-                activeIndex: '1',
-                activeIndex2: '1'
+                activeIndex: '1'
             };
-        },
-        methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }
 </script>
