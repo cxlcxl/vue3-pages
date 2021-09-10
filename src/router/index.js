@@ -18,6 +18,20 @@ export const constantRoutes = [
                 meta: { title: '首页', icon: 'dashboard', affix: true }
             }
         ]
+    },
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/go',
+        meta: {title: '编程语言'},
+        children: [
+            {
+                path: 'go',
+                component: () => import('@/views/golang/index'),
+                name: 'golang',
+                meta: { title: 'Golang', icon: 'golang', affix: true }
+            }
+        ]
     }
 ]
 

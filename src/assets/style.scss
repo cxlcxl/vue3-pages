@@ -50,6 +50,19 @@ body {
     .el-menu {
       height: 60px;
       flex: 1;
+
+      .el-menu-item {
+        padding: 0;
+
+        a {
+          color: inherit;
+          box-sizing: border-box;
+          text-decoration: none;
+          display: block;
+          width: 100%;
+          padding: 0 20px;
+        }
+      }
     }
 
     .user-info {
@@ -68,6 +81,7 @@ body {
         vertical-align: middle;
         margin-right: 10px;
       }
+
       .el-dropdown-link {
         color: #fff;
       }

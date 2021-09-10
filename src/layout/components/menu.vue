@@ -1,32 +1,64 @@
 <template>
-    <el-menu :default-active="activeIndex"
-             class="el-menu-demo"
-             mode="horizontal"
-             @select="handleSelect"
-             background-color="#545c64"
-             text-color="#fff"
-             active-text-color="#ffd04b">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-menu-item index="3">消息中心</el-menu-item>
+    <el-menu :default-active="activeMenuItem" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        <template v-for="r in sysRouters">
+            <el-submenu v-if="r.children && r.children.length > 1 && !r.hidden" :index="r.path">
+                <template slot="title">{{r.meta.title}}</template>
+                <el-menu-item v-for="c in r.children" :index="c.path">
+                    <router-link :to="r.path | pathFilter(c.path)">{{c.meta.title}}</router-link>
+                </el-menu-item>
+            </el-submenu>
+            <el-menu-item v-else-if="r.children && r.children.length === 1 && !r.hidden" :index="r.children[0].path">
+                <router-link :to="r.path | pathFilter(r.children[0].path)">{{r.children[0].meta.title}}</router-link>
+            </el-menu-item>
+            <el-menu-item v-else-if="!r.hidden" :index="r.path">
+                <router-link :to="r.path">{{r.meta.title}}</router-link>
+            </el-menu-item>
+        </template>
     </el-menu>
 </template>
 
 <script>
+    import {constantRoutes} from '@/router'
+
     export default {
         name: "Menu",
         data() {
             return {
-                activeIndex: '1'
+                activeMenuItem: ''
             }
         },
-        methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+        computed: {
+            sysRouters() {
+                return constantRoutes
             }
+        },
+        filters: {
+            pathFilter(rPath, cPath) {
+                if (rPath.substr(rPath.length - 1) !== "/" && cPath.indexOf("/") !== 0) {
+                    cPath = "/" + cPath
+                }
+                return rPath + cPath
+            }
+        },
+        mounted() {
+            console.log(this.$route.path)
+            this.activeMenuItem = this.$route.path
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.el-menu--horizontal {
+    .el-menu-item {
+        padding: 0;
+        a {
+            color: inherit;
+            box-sizing: border-box;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            padding: 0 20px;
+        }
+    }
+}
 </style>

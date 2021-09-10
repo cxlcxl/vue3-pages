@@ -1,12 +1,10 @@
 <template>
-    <div>
-        Home page
-    </div>
+    <div>php page</div>
 </template>
 
 <script>
     export default {
-        name: "Home"
+        name: "Php"
     }
 </script>
 
