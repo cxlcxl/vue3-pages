@@ -1,4 +1,6 @@
 import axios from 'axios'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
 
 const http = axios.create({
     baseURL: process.env.BASE_URL_PREFIX,
@@ -8,9 +10,9 @@ const http = axios.create({
 //全局请求拦截
 http.interceptors.request.use(
     config => {
-        /*if (store.getters.token) {
+        if (store.getters.token) {
             config.headers['Authorization'] = "Bearer " + getToken()
-        }*/
+        }
         return config;
     },
     function (err) {

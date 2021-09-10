@@ -31,11 +31,12 @@ module.exports = {
         hotOnly: false,
         /* 使用代理 */
         proxy: {
-            '/api': {
-                /* 目标代理服务器地址 */
-                target: 'http://127.0.0.1:8080/',
-                /* 允许跨域 */
+            [process.env.BASE_URL_PREFIX]: {
+                target: process.env.BASE_URL_PREFIX,
                 changeOrigin: true,
+                pathRewrite: {
+                    ['^' + process.env.BASE_URL_PREFIX]: ''
+                }
             },
         },
     },

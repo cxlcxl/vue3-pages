@@ -31,6 +31,7 @@ body {
     left: 0;
     display: flex;
     background-color: rgb(84, 92, 100);
+    z-index: 999;
 
     .logo {
       display: inline-block;
@@ -90,7 +91,7 @@ body {
 
   .app-container {
     margin-top: 68px;
-    padding: 15px 35px;
+    padding: 15px 180px;
     color: #606266;
 
     .el-breadcrumb {

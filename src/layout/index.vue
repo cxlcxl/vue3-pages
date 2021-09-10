@@ -8,9 +8,8 @@
         <transition name="fade-transform" mode="out-in">
             <div class="app-container">
                 <breadcrumb/>
-                <el-card>
-                    <router-view/>
-                </el-card>
+
+                <router-view/>
             </div>
         </transition>
     </div>
