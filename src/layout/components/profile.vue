@@ -47,7 +47,7 @@
         methods: {
             handleCommand(command) {
                 if (command === 'logout') {
-                    this._logout()
+                    this.logout()
                 } else {
                     this.routerTo(command)
                 }
@@ -58,9 +58,9 @@
                 }
                 this.$router.push('/' + page)
             },
-            _logout() {
-                this.$store.dispatch('user/logout').then(res => {
-                    this.$message.success('退出成功')
+            logout() {
+                this.$store.dispatch('user/logout').then(() => {
+                    location.reload()
                 })
             },
             handleLogin() {
