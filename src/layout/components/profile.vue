@@ -1,10 +1,10 @@
 <template>
     <div class="user-info">
-        <div v-if="token">
-            <img :src="avatarSrc"/>
+        <div v-if="user_id">
+            <img :src="avatar ? avatar : avatarSrc"/>
             <el-dropdown @command="handleCommand">
                 <div class="el-dropdown-link">
-                    东皇太一 <i class="el-icon-arrow-down el-icon--right"></i>
+                    {{name}} <i class="el-icon-arrow-down el-icon--right"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="profile" icon="el-icon-user">个人资料</el-dropdown-item>
@@ -17,14 +17,13 @@
             <span class="no-auth" @click="handleLogin">登陆</span>
             <span class="no-auth" @click="handleRegister">注册</span>
 
-            <login-register/>
+            <login-register ref="_login"/>
         </div>
     </div>
 </template>
 
 <script>
     import avatar from '@/assets/avatar.jpg'
-    import {logout} from '@/apis/user'
     import { mapGetters } from 'vuex'
     import LoginRegister from '@/components/login'
 
@@ -40,7 +39,9 @@
         },
         computed: {
             ...mapGetters([
-                'token'
+                'user_id',
+                'name',
+                'avatar'
             ]),
         },
         methods: {
@@ -58,12 +59,12 @@
                 this.$router.push('/' + page)
             },
             _logout() {
-                logout().then(res => {
+                this.$store.dispatch('user/logout').then(res => {
                     this.$message.success('退出成功')
                 })
             },
             handleLogin() {
-                this.$message.success('登陆')
+                this.$refs._login.doLogin()
             },
             handleRegister() {
                 this.$message.success('注册')

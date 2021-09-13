@@ -31,11 +31,11 @@ module.exports = {
         hotOnly: false,
         /* 使用代理 */
         proxy: {
-            [process.env.BASE_URL_PREFIX]: {
-                target: process.env.BASE_URL_PREFIX,
+            [process.env.VUE_APP_BASE_API]: {
+                target: process.env.VUE_APP_BASE_API,
                 changeOrigin: true,
                 pathRewrite: {
-                    ['^' + process.env.BASE_URL_PREFIX]: ''
+                    ['^' + process.env.VUE_APP_BASE_API]: ''
                 }
             },
         },

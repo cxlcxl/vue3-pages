@@ -1,10 +1,10 @@
 <template>
     <el-dialog :title="options.title"
-               :visible.sync="visible"
-               :width="options.width"
+               :visible.sync="options.visible"
+               :width="options.width ? options.width : '500px'"
                :fullscreen="options.fullscreen"
-               :custom-class="options.class"
-               append-to-body :close-on-click-modal="false">
+               :custom-class="options.class ? options.class : 'dialog-component'"
+               append-to-body :close-on-click-modal="false" :close-on-press-escape="false">
         <slot name="body"></slot>
         <slot name="footer"></slot>
     </el-dialog>
@@ -19,29 +19,25 @@
                 default: () => {
                     return {
                         title: "",
-                        width: 500,
+                        width: "500px",
                         fullscreen: false,
-                        class: "",
+                        class: "dialog-component",
+                        visible: false
                     }
                 }
-            }
-        },
-        data() {
-            return {
-                visible: false,
-            }
-        },
-        methods: {
-            handleOpen() {
-                this.visible = true
-            },
-            handleClose() {
-                this.visible = false
             }
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    .dialog-component {
+        .el-dialog__body {
+            padding: 15px 20px 30px;
 
+            .dialog-footer {
+                text-align: center;
+            }
+        }
+    }
 </style>

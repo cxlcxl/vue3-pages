@@ -8,9 +8,9 @@ export function login(data) {
     })
 }
 
-export function Login(data) {
+export function logout(data) {
     return http({
-        url: '/user/login',
+        url: '/user/logout',
         method: 'post',
         data
     })
