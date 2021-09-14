@@ -17,7 +17,7 @@
             <span class="no-auth" @click="handleLogin">登陆</span>
             <span class="no-auth" @click="handleRegister">注册</span>
 
-            <login-register ref="_login"/>
+            <login-register ref="_login_register"/>
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@
 <script>
     import avatar from '@/assets/avatar.jpg'
     import { mapGetters } from 'vuex'
-    import LoginRegister from '@/components/login'
+    import LoginRegister from '@/components/login-register'
 
     export default {
         name: "HeaderProfile",
@@ -64,10 +64,10 @@
                 })
             },
             handleLogin() {
-                this.$refs._login.doLogin()
+                this.$refs._login_register.login()
             },
             handleRegister() {
-                this.$message.success('注册')
+                this.$refs._login_register.register()
             }
         }
     }

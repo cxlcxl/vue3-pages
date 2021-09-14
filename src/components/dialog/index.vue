@@ -4,7 +4,7 @@
                :width="options.width ? options.width : '500px'"
                :fullscreen="options.fullscreen"
                :custom-class="options.class ? options.class : 'dialog-component'"
-               append-to-body :close-on-click-modal="false" :close-on-press-escape="false">
+               append-to-body :close-on-click-modal="false" :close-on-press-escape="false" v-dialog_drag>
         <slot name="body"></slot>
         <slot name="footer"></slot>
     </el-dialog>

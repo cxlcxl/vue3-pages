@@ -13,7 +13,7 @@
                         </el-button>
                     </el-input>
                 </el-form-item>
-                <p class="register">
+                <p class="info">
                     <span><a @click="handleRegister">立即注册</a></span>
                     <span><a @click="forgotPassword">忘记密码?</a></span>
                 </p>
@@ -21,7 +21,7 @@
         </template>
         <div slot="footer" class="dialog-footer">
             <el-button @click="handleCancel" size="small" :loading="loading">取消</el-button>
-            <el-button type="primary" @click="handleLogin" size="small" :loading="loading">确定</el-button>
+            <el-button type="primary" @click="handleLogin" size="small" :loading="loading">登陆</el-button>
         </div>
     </custom-dialog>
 </template>
@@ -40,10 +40,10 @@
                 loading: false,
                 showType: 'hide',
                 options: {
-                    title: '登陆/注册',
+                    title: '登陆',
                     visible: false,
                     width: '360px',
-                    class: ''
+                    class: 'account-panel'
                 },
                 form: {
                     username: '',
@@ -72,7 +72,7 @@
                 this.loading = true
                 this.$refs.login.validate((valid) => {
                     if (valid) {
-                        this.$store.dispatch("user/login", this.form).then(() => {
+                        this.$store.dispatch("user/login-register", this.form).then(() => {
                             this.loading = false
                             this.$store.dispatch("user/getInfo")
                         }).catch(() => {
@@ -88,34 +88,13 @@
                 this.showType = this.showType === 'show' ? 'hide' : 'show'
             },
             handleRegister() {
-
+                this.options.visible = false
+                this.$emit('call-register')
             },
             forgotPassword() {
-
+                this.options.visible = false
+                this.$emit('call-reset-pass')
             }
         }
     }
 </script>
-
-<style scoped lang="scss">
-    .register {
-        font-size: 12px;
-        color: #b5b5b5;
-        text-align: center;
-
-        span {
-            &:not(:first-child) {
-                margin-left: 5px;
-            }
-
-            a {
-                text-decoration: underline;
-                cursor: pointer;
-
-                &:hover {
-                    color: #409eff;
-                }
-            }
-        }
-    }
-</style>
