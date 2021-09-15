@@ -7,8 +7,6 @@
         </div>
         <transition name="fade-transform" mode="out-in">
             <div class="app-container">
-                <breadcrumb/>
-
                 <router-view/>
             </div>
         </transition>
@@ -18,11 +16,10 @@
 <script>
     import Profile from './components/profile'
     import HeaderMenu from './components/menu'
-    import Breadcrumb from './components/breadcrumb'
 
     export default {
         components: {
-            Profile, HeaderMenu, Breadcrumb
+            Profile, HeaderMenu
         },
         name: "Layout",
         data() {

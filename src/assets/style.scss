@@ -90,7 +90,7 @@ body {
   }
 
   .app-container {
-    margin-top: 68px;
+    margin-top: 78px;
     padding: 15px 180px;
     color: #606266;
 
@@ -100,6 +100,11 @@ body {
 
     .el-card {
       min-height: 350px;
+    }
+    .news-container {
+      .el-card__body {
+        padding: 30px !important;
+      }
     }
   }
 }
