@@ -1,5 +1,5 @@
 <template>
-    <el-menu :default-active="activeMenuItem" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu :default-active="activeMenuItem" mode="horizontal" background-color="#090723" text-color="#aeaeae" active-text-color="#fff">
         <template v-for="r in sysRouters">
             <el-submenu v-if="r.children && r.children.length > 1 && !r.hidden" :index="r.path">
                 <template slot="title">{{r.meta.title}}</template>

@@ -2,11 +2,11 @@
     <custom-dialog ref="loginDialog" :options="options">
         <template slot="body">
             <el-form ref="login" :model="form" size="small" label-width="80px" :rules="loginRules">
-                <el-form-item label="登陆名" prop="username">
-                    <el-input placeholder="请输入登陆名" v-model="form.username"></el-input>
+                <el-form-item label="登陆名" prop="user_name">
+                    <el-input placeholder="请输入登陆名" v-model="form.user_name"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input :type="showType|passTypeView" placeholder="请输入密码" v-model="form.password">
+                <el-form-item label="密码" prop="pass">
+                    <el-input :type="showType|passTypeView" placeholder="请输入密码" v-model="form.pass">
                         <el-button slot="append" @click="handleShowPass">
                             <i class="el-icon-view" v-if="showType === 'show'"></i>
                             <svg-icon icon-class="eye" v-else></svg-icon>
@@ -46,12 +46,12 @@
                     class: 'account-panel'
                 },
                 form: {
-                    username: '',
-                    password: '',
+                    user_name: '',
+                    pass: '',
                 },
                 loginRules: {
-                    username: {required: true, message: '登录名必填'},
-                    password: {required: true, message: '密码必填'},
+                    user_name: {required: true, message: '登录名必填'},
+                    pass: {required: true, message: '密码必填'},
                 }
             }
         },
@@ -72,7 +72,7 @@
                 this.loading = true
                 this.$refs.login.validate((valid) => {
                     if (valid) {
-                        this.$store.dispatch("user/login-register", this.form).then(() => {
+                        this.$store.dispatch("user/login", this.form).then(() => {
                             this.loading = false
                             this.$store.dispatch("user/getInfo")
                         }).catch(() => {
