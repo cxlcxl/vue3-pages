@@ -14,6 +14,7 @@
 
 <script>
     import PageRight from '@/views/components/page-right'
+    import {newDetail} from '@/apis/news'
 
     export default {
         name: "NewDetail",
@@ -24,7 +25,8 @@
             return {
                 params: {
                     id: 0
-                }
+                },
+                newInfo: {}
             }
         },
         mounted() {
@@ -33,6 +35,9 @@
         methods: {
             initPage() {
                 this.params = this.$route.params
+                newDetail(this.params.id).then(res => {
+                    this.newInfo = res.data
+                })
             }
         }
     }

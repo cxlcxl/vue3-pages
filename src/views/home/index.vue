@@ -2,8 +2,8 @@
     <el-row :gutter="15">
         <el-col :span="18">
             <el-card class="news-container">
-                <div v-if="list.length > 0">
-                    <div class="news-list" v-for="item in list">
+                <div v-if="newList.list.length > 0">
+                    <div class="news-list" v-for="item in newList.list">
                         <h3 class="news-title" @click="newDetail(item.id)">{{item.title}}</h3>
                         <p class="news-create_at">
                             <svg-icon icon-class="clock"></svg-icon>&nbsp;&nbsp;{{item.created_at}}
@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="news-pagination">
-                        <el-pagination :page-size="15" layout="prev, pager, next, total" :total="1000"></el-pagination>
+                        <el-pagination :page-size="search.search" layout="prev, pager, next, total" :total="newList.total"></el-pagination>
                     </div>
                 </div>
                 <el-skeleton :rows="6" animated v-else/>
@@ -27,6 +27,7 @@
 
 <script>
     import PageRight from '@/views/components/page-right'
+    import {getNews} from '@/apis/news'
 
     export default {
         name: "Home",
@@ -35,35 +36,25 @@
         },
         data() {
             return {
-                list: [
-                    {
-                        id: 1,
-                        title: "JSON Binding when incorrect type is passed in #2131",
-                        created_at: "2021-09-15",
-                        content: "I would like to use binding to validate JSON body input to my HTTP handlers, but I get a panic when the incorrect type is passed in. Am I doing something wrong? Should I be type checking my JSON input before calling the Bind function?@qq.com"
-                    },
-                    {
-                        id: 2,
-                        title: "JSON Binding when incorrect type is passed in #2131",
-                        created_at: "2021-09-15",
-                        content: "I would like to use binding to validate JSON body input to my HTTP handlers, but I get a panic when the incorrect type is passed in. Am I doing something wrong? Should I be type checking my JSON input before calling the Bind function?@qq.com"
-                    },
-                    {
-                        id: 3,
-                        title: "JSON Binding when incorrect type is passed in #2131",
-                        created_at: "2021-09-15",
-                        content: "I would like to use binding to validate JSON body input to my HTTP handlers, but I get a panic when the incorrect type is passed in. Am I doing something wrong? Should I be type checking my JSON input before calling the Bind function?@qq.com"
-                    },
-                    {
-                        id: 4,
-                        title: "JSON Binding when incorrect type is passed in #2131",
-                        created_at: "2021-09-15",
-                        content: "I would like to use binding to validate JSON body input to my HTTP handlers, but I get a panic when the incorrect type is passed in. Am I doing something wrong? Should I be type checking my JSON input before calling the Bind function?@qq.com"
-                    },
-                ]
+                newList: {
+                    total: 0,
+                    list: []
+                },
+                search: {
+                    page: 1,
+                    limit: 15
+                }
             }
         },
+        mounted() {
+            this.getNewsList()
+        },
         methods: {
+            getNewsList() {
+                getNews(this.search).then(res => {
+                    this.newList = res.data
+                })
+            },
             newDetail(new_id) {
                 this.$router.push('/news/' + new_id)
             }
