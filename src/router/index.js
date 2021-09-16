@@ -32,6 +32,15 @@ export const constantRoutes = [
                 meta: { title: 'Golang', icon: 'golang', affix: true }
             }
         ]
+    },
+    // 隐藏的路由
+    {
+        path: '/',
+        component: Layout,
+        hidden: true,
+        children: [
+            {path: 'news/:id', component: () => import('@/views/home/new-detail')}
+        ]
     }
 ]
 

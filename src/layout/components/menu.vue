@@ -3,7 +3,7 @@
         <template v-for="r in sysRouters">
             <el-submenu v-if="r.children && r.children.length > 1 && !r.hidden" :index="r.path">
                 <template slot="title">{{r.meta.title}}</template>
-                <el-menu-item v-for="c in r.children" :index="c.path">
+                <el-menu-item v-for="c in r.children" :index="c.path" v-show="!c.hidden">
                     <router-link :to="r.path | pathFilter(c.path)">{{c.meta.title}}</router-link>
                 </el-menu-item>
             </el-submenu>
@@ -41,7 +41,6 @@
             }
         },
         mounted() {
-            console.log(this.$route.path)
             this.activeMenuItem = this.$route.path
         }
     }

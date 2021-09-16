@@ -20,9 +20,7 @@
         </el-col>
 
         <el-col :span="6">
-            <el-card>
-                <page-right/>
-            </el-card>
+            <page-right/>
         </el-col>
     </el-row>
 </template>
@@ -67,7 +65,7 @@
         },
         methods: {
             newDetail(new_id) {
-                this.$message.success(new_id)
+                this.$router.push('/news/' + new_id)
             }
         }
     }

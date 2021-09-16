@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <el-card>
         <profile-card/>
         <search/>
         <topic/>
         <my-news/>
-    </div>
+    </el-card>
 </template>
 
 <script>
